@@ -3,8 +3,7 @@ set(CMAKE_VERBOSE_MAKEFILE 1) # to see all make process
 
 project( icp_samples )
 
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -msse3 -pg -openmp ")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse3 -openmp -O3 ")
 
 find_package(PCL 1.7 REQUIRED)
 
