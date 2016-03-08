@@ -4,6 +4,7 @@ set(CMAKE_VERBOSE_MAKEFILE 1) # to see all make process
 project( icp_samples )
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -msse3 -pg -openmp ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
 
 find_package(PCL 1.7 REQUIRED)
 
@@ -12,7 +13,7 @@ link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
 set(SCIP_INCLUDE_DIRS ../sparseicp/)
-set(nanoflann_INCLUDE_DIRS ../nanoflann/include/)
+set(nanoflann_INCLUDE_DIRS ../sparseicp/include/)
 
 include_directories(${SCIP_INCLUDE_DIRS})
 include_directories(${nanoflann_INCLUDE_DIRS})
