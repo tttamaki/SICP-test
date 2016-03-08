@@ -9,10 +9,26 @@ Requirements
 ### sparseicp
 - http://lgg.epfl.ch/sparseicp
 - https://code.google.com/p/sparseicp/
-- https://code.google.com/p/sparseicp/ 
+- https://github.com/OpenGP/sparseicp 
 
-### nanoflann
-- https://github.com/jlblancoc/nanoflann
+(now nanoflann.h is included in sparseicp)
+
+Then apply the patch.
+```diff:
+diff --git a/ICP.h b/ICP.h
+index b9583f8..8013642 100644
+--- a/ICP.h
++++ b/ICP.h
+@@ -345,7 +345,7 @@ namespace SICP {
+                     if(dual < par.stop) break;
+                 }
+                 /// C update (lagrange multipliers)
+-                Eigen::VectorXf P = (Qn.array()*(X-Qp).array()).colwise().sum().transpose()-Z.array();
++                Eigen::VectorXd P = (Qn.array()*(X-Qp).array()).colwise().sum().transpose()-Z.array();
+                 if(!par.use_penalty) C.noalias() += mu*P;
+                 /// mu update (penalty)
+                 if(mu < par.max_mu) mu *= par.alpha;
+```
 
 ### misc
 - pcl > 1.7
@@ -24,8 +40,24 @@ Build
 -----
 ```
 git clone https://github.com/tttamaki/SICP-test.git
-git clone https://github.com/jlblancoc/nanoflann.git
 git clone https://github.com/OpenGP/sparseicp.git
+echo "apply the patch, if needed"
+patch -p0 <<EOF
+diff --git sparseicp.org/ICP.h sparseicp/ICP.h
+index b9583f8..8013642 100644
+--- sparseicp.org/ICP.h
++++ sparseicp/ICP.h
+@@ -345,7 +345,7 @@ namespace SICP {
+                     if(dual < par.stop) break;
+                 }
+                 /// C update (lagrange multipliers)
+-                Eigen::VectorXf P = (Qn.array()*(X-Qp).array()).colwise().sum().transpose()-Z.array();
++                Eigen::VectorXd P = (Qn.array()*(X-Qp).array()).colwise().sum().transpose()-Z.array();
+                 if(!par.use_penalty) C.noalias() += mu*P;
+                 /// mu update (penalty)
+                 if(mu < par.max_mu) mu *= par.alpha;
+EOF
+echo "patch end."
 cd SICP-test/
 mkdir build
 cd build/
