@@ -59,3 +59,20 @@ Codes
 - `sicp1_simple_icp.cpp`: simple ICP/SICP registration with sparseicp library, along with pcl for reading and visualizaton.
 - `sicp2_with_normal_iterative_view.cpp`: ICP/SICP with point-to-point/point-to-plane. Registration process is animated.
 
+Run
+---
+
+sample 1
+```
+cd build
+./sicp1_simple_icp ../data/bunny/bun{000,045}mesh.ply
+```
+
+sample 2
+```
+cd build
+./sicp2_with_normal_iterative_view ../data/bunny/bun{000,045}mesh.ply
+```
+
+
+
