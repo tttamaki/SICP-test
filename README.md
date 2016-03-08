@@ -13,22 +13,8 @@ Requirements
 
 (now nanoflann.h is included in sparseicp)
 
-Then apply the patch.
-```diff:
-diff --git a/ICP.h b/ICP.h
-index b9583f8..8013642 100644
---- a/ICP.h
-+++ b/ICP.h
-@@ -345,7 +345,7 @@ namespace SICP {
-                     if(dual < par.stop) break;
-                 }
-                 /// C update (lagrange multipliers)
--                Eigen::VectorXf P = (Qn.array()*(X-Qp).array()).colwise().sum().transpose()-Z.array();
-+                Eigen::VectorXd P = (Qn.array()*(X-Qp).array()).colwise().sum().transpose()-Z.array();
-                 if(!par.use_penalty) C.noalias() += mu*P;
-                 /// mu update (penalty)
-                 if(mu < par.max_mu) mu *= par.alpha;
-```
+Then apply the patch. (see the Build section)
+
 
 ### misc
 - pcl > 1.7
